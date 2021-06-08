@@ -22,6 +22,7 @@ pipeline {
         stage ('Deploy') {
             steps {
                 echo currentBuild.displayName
+                echo params.deploy_ver
             }
         }
     }
