@@ -5,9 +5,11 @@ pipeline {
             steps {
                 script {
                     properties([
-                        string(
-                            name: 'deploy_ver',
-                            description: 'Version to deploy (if deploy pipeline)')
+                        parameters([
+                            string(
+                                name: 'deploy_ver',
+                                description: 'Version to deploy (if deploy pipeline)')
+                        ])
                     ])
                 }
             }
