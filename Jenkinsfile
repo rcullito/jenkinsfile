@@ -19,5 +19,10 @@ pipeline {
                 echo 'Hello world!' 
             }
         }
+        stage ('Deploy') {
+            steps {
+                echo currentBuild.displayName
+            }
+        }
     }
 }
