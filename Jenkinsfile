@@ -8,7 +8,13 @@ pipeline {
                         parameters([
                             string(
                                 name: 'deploy_ver',
-                                description: 'Version to deploy (if deploy pipeline)')
+                                description: 'Version to deploy (if deploy pipeline)'
+                            ),
+                            choice(
+                                name: 'release_level',
+                                choices: ['minor', 'major', 'patch'],
+                                description: 'Release level (if release pipeline)'
+                            )
                         ])
                     ])
                 }
