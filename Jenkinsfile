@@ -29,7 +29,6 @@ pipeline {
                             )
                         ])
                     ])
-                    gitTag = getGitTag()
                 }
             }
         }
@@ -43,7 +42,7 @@ pipeline {
                 echo currentBuild.displayName
                 echo params.deploy_ver
                 echo 'gitTag is:'
-                echo gitTag
+                echo GIT_COMMIT
             }
         }
     }
