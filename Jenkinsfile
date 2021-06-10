@@ -29,7 +29,7 @@ pipeline {
                             )
                         ])
                     ])
-                    gitTag = getIsTagged() ? getGitTag() : null
+                    gitTag = getGitTag()
                 }
             }
         }
