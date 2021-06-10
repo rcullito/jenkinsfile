@@ -1,3 +1,15 @@
+def gitTag = null
+
+// only returns true if a tag matches the supplied commit
+def getIsTagged() {
+  return sh(returnStatus: true, script: 'git describe --tags --exact-match') == 0
+}
+
+def getGitTag() {
+  return sh(returnStdout: true, script: 'git describe --tags').trim()
+}
+
+
 pipeline {
     agent any 
     stages {
@@ -17,6 +29,7 @@ pipeline {
                             )
                         ])
                     ])
+                    gitTag = getIsTagged() ? getGitTag() : null
                 }
             }
         }
@@ -29,6 +42,8 @@ pipeline {
             steps {
                 echo currentBuild.displayName
                 echo params.deploy_ver
+                echo 'gitTag is:'
+                echo gitTag
             }
         }
     }
