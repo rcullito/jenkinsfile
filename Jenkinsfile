@@ -6,7 +6,7 @@ def getIsTagged() {
 }
 
 def getGitTag() {
-  return sh(returnStdout: true, script: 'git describe --tags').trim()
+  return sh(returnStdout: true, script: 'git ls-remote --tags').trim()
 }
 
 
@@ -29,6 +29,7 @@ pipeline {
                             )
                         ])
                     ])
+                    gitTag = getGitTag()
                 }
             }
         }
@@ -43,6 +44,7 @@ pipeline {
                 echo params.deploy_ver
                 echo 'gitTag is:'
                 echo GIT_COMMIT
+                echo gitTag
             }
         }
     }
