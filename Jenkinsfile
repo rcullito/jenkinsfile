@@ -1,7 +1,7 @@
 def taggedSha = null;
 
 def commitAtTag() {
-  return sh(returnStatus: true), script: 'git rev-list -n 1 v0.1.2'
+    return sh(returnStatus: true, script: 'git rev-list -n 1 v0.1.2') == 0
 }
 
 pipeline {
