@@ -1,5 +1,9 @@
 def taggedCommit = null
 
+Boolean validTag(String tag) {
+    return sh(returnStatus: true, script: "git rev-list -n 1 ${tag}") == 0
+}
+
 GString commitAtTag(String tag) {
     return sh(returnStdout: true, script: "git rev-list -n 1 ${tag}").trim()
 }
@@ -18,7 +22,7 @@ pipeline {
                             )
                         ])
                     ])
-                    taggedCommit = commitAtTag(params.deploy_ver)
+                    taggedCommit = validTag(params.deploy_ver) ? commitAtTag(params.deploy_ver) : null
                 }
             }
         }
@@ -28,6 +32,9 @@ pipeline {
             }
         }
         stage ('Deploy') {
+            when {
+                expression { return taggedCommit != null}
+            }
             steps {
                 echo currentBuild.displayName
                 echo params.deploy_ver
