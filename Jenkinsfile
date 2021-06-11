@@ -1,5 +1,5 @@
-def commitAtTag(tag) {
-    return sh(returnStatus: true, script: 'git rev-list -n 1 ${tag}') == 0
+GString commitAtTag(String tag) {
+    return sh(returnStatus: true, script: "git rev-list -n 1 ${tag}").trim()
 }
 
 pipeline {
@@ -13,11 +13,6 @@ pipeline {
                             string(
                                 name: 'deploy_ver',
                                 description: 'Version to deploy (if deploy pipeline)'
-                            ),
-                            choice(
-                                name: 'release_level',
-                                choices: ['minor', 'major', 'patch'],
-                                description: 'Release level (if release pipeline)'
                             )
                         ])
                     ])
