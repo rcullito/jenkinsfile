@@ -1,7 +1,5 @@
-def taggedSha = null;
-
-def commitAtTag() {
-    return sh(returnStatus: true, script: 'git rev-list -n 1 v0.1.2') == 0
+def commitAtTag(tag) {
+    return sh(returnStatus: true, script: 'git rev-list -n 1 ${tag}') == 0
 }
 
 pipeline {
@@ -23,7 +21,6 @@ pipeline {
                             )
                         ])
                     ])
-                    taggedSha = commitAtTag()
                 }
             }
         }
@@ -37,7 +34,7 @@ pipeline {
                 echo currentBuild.displayName
                 echo params.deploy_ver
                 echo 'Tagged Sha is:'
-                echo taggedSha
+                echo commitAtTag(params.deploy_ver)
             }
         }
     }
