@@ -1,7 +1,7 @@
 def taggedCommit = null
 
 GString commitAtTag(String tag) {
-    return sh(returnStatus: true, script: "git rev-list -n 1 ${tag}")
+    return sh(returnStdout: true, script: "git rev-list -n 1 ${tag}").trim()
 }
 
 pipeline {
