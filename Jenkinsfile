@@ -5,7 +5,7 @@ GString commitAtTag(String tag) {
 }
 
 pipeline {
-    agent any 
+    agent any
     stages {
         stage('Setup pipeline') {
             steps {
