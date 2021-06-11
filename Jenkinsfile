@@ -1,5 +1,7 @@
+def taggedCommit = null
+
 GString commitAtTag(String tag) {
-    return sh(returnStatus: true, script: "git rev-list -n 1 ${tag}").trim()
+    return sh(returnStatus: true, script: "git rev-list -n 1 ${tag}")
 }
 
 pipeline {
@@ -16,12 +18,13 @@ pipeline {
                             )
                         ])
                     ])
+                    taggedCommit = commitAtTag(params.deploy_ver)
                 }
             }
         }
         stage('Stage 1') {
             steps {
-                echo 'Hello world!' 
+                echo 'Hello world!'
             }
         }
         stage ('Deploy') {
@@ -29,7 +32,7 @@ pipeline {
                 echo currentBuild.displayName
                 echo params.deploy_ver
                 echo 'Tagged Sha is:'
-                echo commitAtTag(params.deploy_ver)
+                echo taggedCommit
             }
         }
     }
