@@ -41,8 +41,6 @@ pipeline {
                 expression { return taggedCommit != null}
             }
             steps {
-                echo currentBuild.displayName
-                echo params.deploy_ver
                 echo 'Tagged Sha is:'
                 echo taggedCommit
             }
