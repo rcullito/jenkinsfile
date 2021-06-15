@@ -1,5 +1,5 @@
 def taggedCommit = null
-def branchTriggered = null 
+ArrayList branchTriggered = null 
 
 Boolean validTag(String tag) {
     return sh(returnStatus: true, script: "git rev-list -n 1 ${tag}") == 0
@@ -29,9 +29,11 @@ pipeline {
             }
         }
         stage('Log Build Information') {
+            when {
+                expression { return branchTriggered}
+            }
             steps {
-                echo 'Branch Triggered is:'
-                echo branchTriggered
+                echo 'Build Triggered via git branch'
             }
         }
         stage ('Deploy') {
