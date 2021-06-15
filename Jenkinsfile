@@ -1,5 +1,5 @@
 def taggedCommit = null
-ArrayList buildCauses = null
+def buildCauses = null
 
 Boolean validTag(String tag) {
     return sh(returnStatus: true, script: "git rev-list -n 1 ${tag}") == 0
