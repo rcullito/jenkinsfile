@@ -24,7 +24,7 @@ pipeline {
                         ])
                     ])
                     taggedCommit = validTag(params.deploy_ver) ? commitAtTag(params.deploy_ver) : null
-                    buildCauses = readJSON text: currentBuild.getBuildCauses()
+                    buildCauses = currentBuild.getBuildCauses()
                 }
             }
         }
