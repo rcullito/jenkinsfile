@@ -1,4 +1,5 @@
 def taggedCommit = null
+def branchTriggered = null 
 
 Boolean validTag(String tag) {
     return sh(returnStatus: true, script: "git rev-list -n 1 ${tag}") == 0
@@ -23,6 +24,7 @@ pipeline {
                         ])
                     ])
                     taggedCommit = validTag(params.deploy_ver) ? commitAtTag(params.deploy_ver) : null
+                    branchTriggered = currentBuild.getBuildCauses('jenkins.branch.BranchEventCause')
                 }
             }
         }
@@ -40,6 +42,8 @@ pipeline {
                 echo params.deploy_ver
                 echo 'Tagged Sha is:'
                 echo taggedCommit
+                echo 'Branch Triggered is:'
+                echo branchTriggered
             }
         }
     }
