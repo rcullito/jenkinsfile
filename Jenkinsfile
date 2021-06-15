@@ -33,8 +33,10 @@ pipeline {
                 expression { return buildCauses }
             }
             steps {
-                buildCauses.each {
-                    echo "build caused by: ${$it}"
+                script {
+                    buildCauses.each {
+                        echo "build caused by: ${$it}"
+                    }
                 }
             }
         }
