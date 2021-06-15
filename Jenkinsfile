@@ -35,7 +35,7 @@ pipeline {
             steps {
                 script {
                     buildCauses.each {
-                        echo "build caused by: ${$it}"
+                        echo "build caused by: ${it}"
                     }
                 }
             }
