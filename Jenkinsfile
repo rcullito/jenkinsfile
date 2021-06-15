@@ -28,9 +28,10 @@ pipeline {
                 }
             }
         }
-        stage('Stage 1') {
+        stage('Log Build Information') {
             steps {
-                echo 'Hello world!'
+                echo 'Branch Triggered is:'
+                echo branchTriggered
             }
         }
         stage ('Deploy') {
@@ -42,8 +43,6 @@ pipeline {
                 echo params.deploy_ver
                 echo 'Tagged Sha is:'
                 echo taggedCommit
-                echo 'Branch Triggered is:'
-                echo branchTriggered
             }
         }
     }
